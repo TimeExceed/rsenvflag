@@ -1,0 +1,13 @@
+[package]
+name = "rs_envflag"
+version = "0.1.0"
+edition = "2021"
+license-file = "LICENSE"
+description = "An easy way to define flags by environment variables"
+repository = "https://github.com/TimeExceed/rsenvflag"
+readme = "README.md"
+categories = ["rust-patterns"]
+keywords = ["environment variable", "flag"]
+
+[dependencies]
+log = "0.4"
