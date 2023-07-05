@@ -1,4 +1,4 @@
-use rs_envflag::*;
+use rs_envflag::define_bool_flag;
 
 define_bool_flag!(BOOL_FLAG, "an example about bool flag");
 define_bool_flag!(

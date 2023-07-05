@@ -1,4 +1,4 @@
-use rs_envflag::*;
+use rs_envflag::define_i64_flag;
 
 define_i64_flag!(I64_FLAG, "an example about i64 flag");
 define_i64_flag!(

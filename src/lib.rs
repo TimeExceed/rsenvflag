@@ -71,13 +71,13 @@ impl StrFlagWithDefault {
 #[macro_export]
 macro_rules! define_str_flag {
     ($key:ident, $help:literal) => {
-        const $key: EnvFlag<String> = EnvFlag::<String> {
+        const $key: $crate::EnvFlag<String> = $crate::EnvFlag::<String> {
             key: stringify!($key),
             parser: |_key: &str, val: &str| -> String { val.to_string() },
         };
     };
     ($key:ident, $help:literal, $default:expr) => {
-        const $key: StrFlagWithDefault = StrFlagWithDefault::new(stringify!($key), $default);
+        const $key: $crate::StrFlagWithDefault = $crate::StrFlagWithDefault::new(stringify!($key), $default);
     };
 }
 
@@ -134,10 +134,10 @@ fn parse_bool(key: &str, val: &str) -> bool {
 #[macro_export]
 macro_rules! define_bool_flag {
     ($key:ident, $help:literal) => {
-        const $key: BoolFlag = BoolFlag::new(stringify!($key));
+        const $key: $crate::BoolFlag = $crate::BoolFlag::new(stringify!($key));
     };
     ($key:ident, $help:literal, $default:expr) => {
-        const $key: BoolFlagWithDefault = BoolFlagWithDefault::new(stringify!($key), $default);
+        const $key: $crate::BoolFlagWithDefault = $crate::BoolFlagWithDefault::new(stringify!($key), $default);
     };
 }
 
@@ -194,10 +194,10 @@ fn parse_int(key: &str, x: &str) -> i64 {
 #[macro_export]
 macro_rules! define_i64_flag {
     ($key:ident, $help:literal) => {
-        const $key: I64Flag = I64Flag::new(stringify!($key));
+        const $key: $crate::I64Flag = $crate::I64Flag::new(stringify!($key));
     };
     ($key:ident, $help:literal, $default:expr) => {
-        const $key: I64FlagWithDefault = I64FlagWithDefault::new(stringify!($key), $default);
+        const $key: $crate::I64FlagWithDefault = $crate::I64FlagWithDefault::new(stringify!($key), $default);
     };
 }
 
@@ -254,9 +254,9 @@ fn parse_f64(key: &str, x: &str) -> f64 {
 #[macro_export]
 macro_rules! define_f64_flag {
     ($key:ident, $help:literal) => {
-        const $key: F64Flag = F64Flag::new(stringify!($key));
+        const $key: $crate::F64Flag = $crate::F64Flag::new(stringify!($key));
     };
     ($key:ident, $help:literal, $default:expr) => {
-        const $key: F64FlagWithDefault = F64FlagWithDefault::new(stringify!($key), $default);
+        const $key: $crate::F64FlagWithDefault = $crate::F64FlagWithDefault::new(stringify!($key), $default);
     };
 }
