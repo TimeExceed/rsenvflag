@@ -1,17 +1,18 @@
-use rs_envflag::define_f64_flag;
+use rs_envflag_macros::*;
 
-define_f64_flag!(F64_FLAG, "an example about f64 flag");
-define_f64_flag!(
-    F64_FLAG_W_DEFAULT,
-    "an example about f64 flag with default",
-    0.5
-);
+/// an example about f64 flag
+#[envflag]
+const F64_FLAG: Option<f64>;
+
+/// an example about f64 flag with default
+#[envflag(default = 0.5)]
+const F64_FLAG_W_DEFAULT: f64;
 
 fn main() {
-    if let Some(x) = F64_FLAG.get() {
+    if let Some(x) = F64_FLAG.fetch() {
         println!("{}", x);
     } else {
         println!("not present.");
     }
-    println!("{}", F64_FLAG_W_DEFAULT.get());
+    println!("{}", F64_FLAG_W_DEFAULT.fetch());
 }

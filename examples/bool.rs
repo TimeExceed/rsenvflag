@@ -1,17 +1,18 @@
-use rs_envflag::define_bool_flag;
+use rs_envflag_macros::*;
 
-define_bool_flag!(BOOL_FLAG, "an example about bool flag");
-define_bool_flag!(
-    BOOL_FLAG_W_DEFAULT,
-    "an example about bool flag with default",
-    true
-);
+/// an example about bool flag
+#[envflag]
+const BOOL_FLAG: Option<bool>;
+
+/// an example about bool flag with default
+#[envflag(default = true)]
+const BOOL_FLAG_W_DEFAULT: bool;
 
 fn main() {
-    if let Some(x) = BOOL_FLAG.get() {
+    if let Some(x) = BOOL_FLAG.fetch() {
         println!("{}", x);
     } else {
         println!("not present.");
     }
-    println!("{}", BOOL_FLAG_W_DEFAULT.get());
+    println!("{}", BOOL_FLAG_W_DEFAULT.fetch());
 }

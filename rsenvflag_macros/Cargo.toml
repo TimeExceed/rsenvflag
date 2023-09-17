@@ -1,5 +1,5 @@
 [package]
-name = "rs_envflag"
+name = "rs_envflag_macros"
 version = "0.2.0"
 edition = "2021"
 license-file = "LICENSE"
@@ -9,12 +9,8 @@ readme = "README.md"
 categories = ["rust-patterns"]
 keywords = ["flag"]
 
+[lib]
+proc-macro = true
+
 [dependencies]
-log = "0.4"
-
-[workspace]
-members = ["rsenvflag_macros"]
-
-[dev-dependencies]
-rs_envflag_macros = { path = "rsenvflag_macros" }
-
+rs_envflag = { path = ".." }

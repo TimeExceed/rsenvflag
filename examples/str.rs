@@ -1,17 +1,18 @@
-use rs_envflag::define_str_flag;
+use rs_envflag_macros::*;
 
-define_str_flag!(STR_FLAG, "an example about str flag");
-define_str_flag!(
-    STR_FLAG_W_DEFAULT,
-    "an example about str flag with default",
-    "abc"
-);
+/// an example about str flag
+#[envflag]
+const STR_FLAG: Option<String>;
+
+/// an example about str flag with default
+#[envflag(default = "abc")]
+const STR_FLAG_W_DEFAULT: String;
 
 fn main() {
-    if let Some(x) = STR_FLAG.get() {
+    if let Some(x) = STR_FLAG.fetch() {
         println!("{}", x);
     } else {
         println!("not present.");
     }
-    println!("{}", STR_FLAG_W_DEFAULT.get());
+    println!("{}", STR_FLAG_W_DEFAULT.fetch());
 }

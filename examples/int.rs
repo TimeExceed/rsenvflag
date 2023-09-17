@@ -1,17 +1,18 @@
-use rs_envflag::define_i64_flag;
+use rs_envflag_macros::*;
 
-define_i64_flag!(I64_FLAG, "an example about i64 flag");
-define_i64_flag!(
-    I64_FLAG_W_DEFAULT,
-    "an example about i64 flag with default",
-    42
-);
+/// an example about i64 flag
+#[envflag]
+const I64_FLAG: Option<i64>;
+
+/// an example about i64 flag with default
+#[envflag(default = 42)]
+const I64_FLAG_W_DEFAULT: i64;
 
 fn main() {
-    if let Some(x) = I64_FLAG.get() {
+    if let Some(x) = I64_FLAG.fetch() {
         println!("{}", x);
     } else {
         println!("not present.");
     }
-    println!("{}", I64_FLAG_W_DEFAULT.get());
+    println!("{}", I64_FLAG_W_DEFAULT.fetch());
 }
