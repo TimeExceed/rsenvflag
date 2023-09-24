@@ -13,4 +13,4 @@ keywords = ["flag"]
 proc-macro = true
 
 [dependencies]
-rs_envflag = { path = ".." }
+rs_envflag = "0.2"
