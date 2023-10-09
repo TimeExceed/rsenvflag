@@ -297,12 +297,9 @@ impl FlagContext {
 
     fn default_type_param(&self, out: &mut TokenStream) {
         out.extend([TokenTree::Punct(Punct::new(',', Spacing::Alone))]);
-        match self.base_type.back() {
+        match self.single_token_base_type() {
             Some(TokenTree::Ident(id)) if id.to_string() == "String" => {
                 out.extend([
-                    TokenTree::Punct(Punct::new('&', Spacing::Alone)),
-                    TokenTree::Punct(Punct::new('\'', Spacing::Joint)),
-                    TokenTree::Ident(Ident::new("static", Span::mixed_site())),
                     TokenTree::Ident(Ident::new("str", Span::mixed_site())),
                 ]);
             }
@@ -312,11 +309,6 @@ impl FlagContext {
                 out.extend([tt.clone()]);
             }
             _ => {
-                out.extend([
-                    TokenTree::Punct(Punct::new('&', Spacing::Alone)),
-                    TokenTree::Punct(Punct::new('\'', Spacing::Joint)),
-                    TokenTree::Ident(Ident::new("static", Span::mixed_site())),
-                ]);
                 out.extend(self.base_type.iter().cloned());
             }
         }
@@ -367,14 +359,24 @@ impl FlagContext {
     }
 
     fn default_value(&self, out: &mut TokenStream) {
-        match self.base_type.back() {
-            Some(TokenTree::Ident(id)) if id.to_string() == "String" => {
+        match self.single_token_base_type() {
+            Some(TokenTree::Ident(id))
+                if ["i64", "f64", "bool"].contains(&id.to_string().as_str()) =>
+            {
                 out.extend([TokenTree::Punct(Punct::new('&', Spacing::Alone))]);
                 out.extend(self.default.iter().cloned());
             }
             _ => {
                 out.extend(self.default.iter().cloned());
             }
+        }
+    }
+
+    fn single_token_base_type(&self) -> Option<&TokenTree> {
+        if self.base_type.len() != 1 {
+            None
+        } else {
+            self.base_type.back()
         }
     }
 }

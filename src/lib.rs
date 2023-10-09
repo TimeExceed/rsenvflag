@@ -23,18 +23,22 @@ impl<T> EnvFlag<T> {
     }
 }
 
-pub struct EnvFlagWithDefault<T, DefaultT> {
+pub struct EnvFlagWithDefault<T, DefaultT>
+where
+    T: Clone,
+    DefaultT: ToOwned<Owned = T> + 'static + ?Sized,
+{
     pub env: EnvFlag<T>,
-    pub default: DefaultT,
+    pub default: &'static DefaultT,
 }
 
 impl<T, DefaultT> EnvFlagWithDefault<T, DefaultT>
 where
-    T: From<DefaultT>,
-    DefaultT: 'static + Copy,
+    T: Clone,
+    DefaultT: ToOwned<Owned = T> + 'static + ?Sized,
 {
     pub fn fetch(&'static self) -> T {
-        self.env.fetch().unwrap_or(self.default.into())
+        self.env.fetch().unwrap_or(self.default.to_owned())
     }
 }
 

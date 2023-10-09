@@ -217,8 +217,3 @@ fn v_parser(_key: &str, value: &str) -> V {
     V(value.to_string())
 }
 
-impl From<&V> for V {
-    fn from(value: &V) -> Self {
-        value.clone()
-    }
-}

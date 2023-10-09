@@ -110,7 +110,7 @@ fn main() {
     println!("{:?}", X_W_DEFAULT.fetch());
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 struct V(String);
 
 impl V {
@@ -120,20 +120,11 @@ impl V {
 fn v_parser(_key: &str, value: &str) -> V {
     V(value.to_string())
 }
-
-impl From<&V> for V {
-    fn from(value: &V) -> Self {
-        V(value.0.clone())
-    }
-}
 ```
 
 1.  Besides parsers, _const_ default values are required.
     And they must be refered by references, e.g., in this example `default=&V::DEFAULT`.
-2.  A conversion from `&V` to `V`.
-    Why so bothering?
-    The answer is that the default values can have different types.
-    Just they, actually their references, must be convertiable to types of flags.
+2.  `V` must implement the `Clone` trait, so the default value will be cloned when necessary.
 
 ### flag renaming
 
