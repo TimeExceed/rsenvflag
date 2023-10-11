@@ -7,7 +7,7 @@ const X: Option<V>;
 const X_W_DEFAULT: V;
 
 fn main() {
-    if let Some(x) = X.fetch() {
+    if let Some(x) = X.fetch().unwrap() {
         println!("{:?}", x);
     } else {
         println!("not present.");
@@ -22,6 +22,6 @@ impl V {
     const DEFAULT: V = V(String::new());
 }
 
-fn v_parser(_key: &str, value: &str) -> V {
-    V(value.to_string())
+fn v_parser(_key: &str, value: &str) -> anyhow::Result<V> {
+    Ok(V(value.to_string()))
 }

@@ -299,9 +299,7 @@ impl FlagContext {
         out.extend([TokenTree::Punct(Punct::new(',', Spacing::Alone))]);
         match self.single_token_base_type() {
             Some(TokenTree::Ident(id)) if id.to_string() == "String" => {
-                out.extend([
-                    TokenTree::Ident(Ident::new("str", Span::mixed_site())),
-                ]);
+                out.extend([TokenTree::Ident(Ident::new("str", Span::mixed_site()))]);
             }
             Some(tt @ TokenTree::Ident(id))
                 if ["i64", "f64", "bool"].contains(&id.to_string().as_str()) =>

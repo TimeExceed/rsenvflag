@@ -9,10 +9,10 @@ const STR_FLAG: Option<String>;
 const STR_FLAG_W_DEFAULT: String;
 
 fn main() {
-    if let Some(x) = STR_FLAG.fetch() {
+    if let Some(x) = STR_FLAG.fetch().unwrap() {
         println!("{}", x);
     } else {
         println!("not present.");
     }
-    println!("{}", STR_FLAG_W_DEFAULT.fetch());
+    println!("{}", STR_FLAG_W_DEFAULT.fetch().unwrap());
 }

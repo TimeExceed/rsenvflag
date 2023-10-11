@@ -9,10 +9,10 @@ const F64_FLAG: Option<f64>;
 const F64_FLAG_W_DEFAULT: f64;
 
 fn main() {
-    if let Some(x) = F64_FLAG.fetch() {
+    if let Some(x) = F64_FLAG.fetch().unwrap() {
         println!("{}", x);
     } else {
         println!("not present.");
     }
-    println!("{}", F64_FLAG_W_DEFAULT.fetch());
+    println!("{}", F64_FLAG_W_DEFAULT.fetch().unwrap());
 }

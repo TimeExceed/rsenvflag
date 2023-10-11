@@ -9,10 +9,10 @@ const BOOL_FLAG: Option<bool>;
 const BOOL_FLAG_W_DEFAULT: bool;
 
 fn main() {
-    if let Some(x) = BOOL_FLAG.fetch() {
+    if let Some(x) = BOOL_FLAG.fetch().unwrap() {
         println!("{}", x);
     } else {
         println!("not present.");
     }
-    println!("{}", BOOL_FLAG_W_DEFAULT.fetch());
+    println!("{}", BOOL_FLAG_W_DEFAULT.fetch().unwrap());
 }

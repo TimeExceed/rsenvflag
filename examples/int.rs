@@ -9,10 +9,10 @@ const I64_FLAG: Option<i64>;
 const I64_FLAG_W_DEFAULT: i64;
 
 fn main() {
-    if let Some(x) = I64_FLAG.fetch() {
+    if let Some(x) = I64_FLAG.fetch().unwrap() {
         println!("{}", x);
     } else {
         println!("not present.");
     }
-    println!("{}", I64_FLAG_W_DEFAULT.fetch());
+    println!("{}", I64_FLAG_W_DEFAULT.fetch().unwrap());
 }

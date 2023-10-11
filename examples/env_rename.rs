@@ -5,7 +5,7 @@ use rs_envflag_macros::*;
 const ABC: Option<String>;
 
 fn main() {
-    if let Some(x) = ABC.fetch() {
+    if let Some(x) = ABC.fetch().unwrap() {
         println!("{}", x);
     } else {
         println!("not present.");

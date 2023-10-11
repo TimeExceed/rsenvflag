@@ -15,7 +15,7 @@ use rs_envflag_macros::*;
 const STR_FLAG: Option<String>;
 
 fn main() {
-    if let Some(x) = STR_FLAG.fetch() {
+    if let Some(x) = STR_FLAG.fetch().unwrap() {
         println!("{}", x);
     } else {
         println!("not present.");
@@ -49,7 +49,7 @@ use rs_envflag_macros::*;
 const STR_FLAG_W_DEFAULT: String;
 
 fn main() {
-    println!("{}", STR_FLAG_W_DEFAULT.fetch());
+    println!("{}", STR_FLAG_W_DEFAULT.fetch().unwrap());
 }
 ```
 
@@ -76,7 +76,7 @@ use rs_envflag_macros::*;
 const X: Option<V>;
 
 fn main() {
-    if let Some(x) = X.fetch() {
+    if let Some(x) = X.fetch().unwrap() {
         println!("{:?}", x);
     } else {
         println!("not present.");
@@ -86,8 +86,8 @@ fn main() {
 #[derive(Debug)]
 struct V(String);
 
-fn v_parser(_key: &str, value: &str) -> V {
-    V(value.to_string())
+fn v_parser(_key: &str, value: &str) -> anyhow::Result<V> {
+    Ok(V(value.to_string()))
 }
 ```
 
@@ -107,7 +107,7 @@ use rs_envflag_macros::*;
 const X_W_DEFAULT: V;
 
 fn main() {
-    println!("{:?}", X_W_DEFAULT.fetch());
+    println!("{:?}", X_W_DEFAULT.fetch().unwrap());
 }
 
 #[derive(Debug, Clone)]
@@ -117,8 +117,8 @@ impl V {
     const DEFAULT: V = V(String::new());
 }
 
-fn v_parser(_key: &str, value: &str) -> V {
-    V(value.to_string())
+fn v_parser(_key: &str, value: &str) -> anyhow::Result<V> {
+    Ok(V(value.to_string()))
 }
 ```
 
@@ -139,7 +139,7 @@ use rs_envflag_macros::*;
 const ABC: Option<String>;
 
 fn main() {
-    if let Some(x) = ABC.fetch() {
+    if let Some(x) = ABC.fetch().unwrap() {
         println!("{}", x);
     } else {
         println!("not present.");
