@@ -1,6 +1,6 @@
 [package]
 name = "rs_envflag"
-version = "0.4.0"
+version = "0.4.1"
 edition = "2021"
 license-file = "LICENSE"
 description = "An easy way to define flags by environment variables"

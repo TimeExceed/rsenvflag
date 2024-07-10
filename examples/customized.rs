@@ -8,7 +8,7 @@ const X_W_DEFAULT: V;
 
 fn main() {
     if let Some(x) = X.fetch().unwrap() {
-        println!("{:?}", x);
+        println!("{}", x.0);
     } else {
         println!("not present.");
     }

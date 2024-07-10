@@ -1,6 +1,6 @@
 [package]
 name = "rs_envflag_macros"
-version = "0.3.0"
+version = "0.4.1"
 edition = "2021"
 license-file = "LICENSE"
 description = "An easy way to define flags by environment variables"
@@ -13,4 +13,4 @@ keywords = ["flag"]
 proc-macro = true
 
 [dependencies]
-rs_envflag = "0.3"
+rs_envflag = "0.4"
